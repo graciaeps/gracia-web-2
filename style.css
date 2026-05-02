@@ -1,0 +1,652 @@
+body {
+    background-color: #E6F2FF;
+    color: #1B263B;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    overflow-x: hidden; 
+    width: 100%;
+}
+
+.navbar {
+    background-color: rgba(230, 242, 255, 0.9);
+    padding: 15px 5%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+
+    border-bottom: 1px solid rgba(0, 51, 102, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 51, 102, 0.08);
+}
+
+.hamburger {
+    width: 30px;
+    height: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.hamburger span {
+    display: block;
+    height: 4px;
+    background-color: #003366;
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.nav-links {
+    display: flex;
+    gap: 10px;
+    margin-left: 15px;
+
+    opacity: 0;
+    transform: translateX(50px);
+    pointer-events: none;
+    transition: 0.4s;
+}
+
+.nav-links.show {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+.nav-links a {
+    color: #003366;
+    text-decoration: none;
+    padding: 8px 14px; 
+    font-weight: bold;
+    font-size: 14px; 
+
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+
+    opacity: 0;
+    transform: translateX(20px) scale(0.9); 
+    transition: 0.25s ease;
+}
+
+.nav-links.show a {
+    opacity: 1;
+    transform: translateX(0) scale(0.9);
+}
+
+.nav-links.show a:nth-child(1) { transition-delay: 0.1s; }
+.nav-links.show a:nth-child(2) { transition-delay: 0.2s; }
+.nav-links.show a:nth-child(3) { transition-delay: 0.3s; }
+.nav-links.show a:nth-child(4) { transition-delay: 0.4s; }
+
+.nav-links a.active {
+    background-color: #003366;
+    color: #E6F2FF;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 2;
+}
+
+/* 1. Warna untuk menu navigasi LAIN saat kursor diarahkan (Hover menu tidak aktif) */
+.nav-links a:hover {
+    background-color: #2c5c8a; /* Warna biru yang sedikit lebih terang */
+    color: #ffffff;            /* Teks tetap putih agar kontras */
+    transform: scale(1.1);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* 2. Warna untuk menu yang SEDANG DIBUKA saat kursor diarahkan (Hover menu aktif) */
+.nav-links a.active:hover {
+    background-color: #1B263B; /* Warna biru sangat gelap (hampir hitam) agar beda */
+    color: #ffffff;            /* Teks tetap putih */
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.gallery-header { text-align: center; padding: 50px 20px; }
+.gallery-section { margin-bottom: 40px; }
+
+.scroll-container { width: 100%; overflow-x: auto; padding: 20px 0; cursor: grab; }
+.scroll-container::-webkit-scrollbar { height: 6px; }
+.scroll-container::-webkit-scrollbar-thumb { background: #003366; border-radius: 10px; }
+.scroll-content { display: flex; gap: 20px; padding-left: 5%; }
+.scroll-content::after { content: ""; flex: 0 0 5%; visibility: hidden; }
+
+.card-nct {
+    flex: 0 0 auto;
+    width: 220px;
+    height: 320px;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transition: all 0.4s ease;
+    border: 1px solid rgba(0, 51, 102, 0.1);
+}
+.card-nct.card-landscape { width: 450px; }
+.card-nct img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    cursor: pointer;
+}
+.card-nct:hover {
+    transform: translateY(-12px) rotate(1.5deg);
+    box-shadow: 0 15px 35px rgba(0, 51, 102, 0.3);
+}
+.card-nct:hover img { transform: scale(1.1); }
+
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    align-items: center;
+    justify-content: center;
+}
+.lightbox-content {
+    max-width: 85%;
+    max-height: 85%;
+    border-radius: 10px;
+}
+.close, .prev, .next {
+    position: absolute;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.close { top: 30px; right: 40px; }
+.prev { left: 40px; }
+.next { right: 40px; }
+
+/* Pastikan body menggunakan flex agar footer bisa mepet ke bawah */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Tinggi minimal seukuran layar */
+    margin: 0;
+}
+
+/* TAMBAHKAN INI DI PALING BAWAH */
+.contact-card h3 {
+    margin: 10px 0 5px 0;
+    font-size: 20px;
+}
+
+.contact-card p {
+    margin-bottom: 20px;
+    font-size: 13px;
+    color: #4a6fa5;
+}
+
+/* Biarkan kontainer utama mengambil ruang yang tersedia */
+.hero-container {
+    flex: 1; /* Ini yang akan mendorong footer ke bawah */
+    min-height: auto !important; 
+    padding-bottom: 20px;
+}
+
+.contact-container {
+    display: flex;          /* Mengubah grid jadi flex */
+    justify-content: center; /* Kotak-kotak kumpul di tengah secara horizontal */
+    align-items: center;    /* Kotak-kotak kumpul di tengah secara vertikal (SOLUSI BIAR GAK PANJANG) */
+    gap: 20px;
+    padding: 20px 5%;
+    flex: 1;                /* Tetap mendorong footer ke paling bawah layar */
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid rgba(0, 51, 102, 0.2);
+    margin: 0;
+}
+
+center font {
+    display: block;
+    padding: 10px 0;
+    line-height: 1;
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, #003366, #2c5c8a, #003366);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.gradient-subtitle {
+    background: linear-gradient(135deg, #1B263B, #3a5f85, #1B263B);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.divider {
+    width: 90%;
+    margin: 0 auto 40px;
+    height: 2px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        #003366,
+        #003366,
+        transparent
+    );
+    position: relative;
+}
+
+.divider::after {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 10px;
+    background-color: #003366;
+    border-radius: 50%;
+}
+
+.gallery-title {
+    font-family: 'Segoe UI Variable', 'Segoe UI', system-ui, sans-serif;
+    font-weight: 800;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+
+    background: linear-gradient(135deg, #003366, #2c5c8a, #003366);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    text-shadow: 0 2px 8px rgba(0, 51, 102, 0.2);
+}
+
+.gallery-title::after {
+    content: "";
+    display: block;
+    width: 60%;
+    height: 2px;
+    margin: 8px auto 0;
+}
+
+.handwriting {
+    font-family: "Brush Script MT", "Lucida Handwriting", cursive;
+    font-weight: normal;
+    letter-spacing: 1px;
+}
+
+.hero-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 30px 10% 10px; 
+    min-height: 70vh;
+    overflow: hidden;
+}
+
+.hero-image-wrapper {
+    animation: slideInRight 1.0s ease-out forwards;
+}
+
+.profile-img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid white;
+    box-shadow: 0 0 80px rgba(0, 51, 102, 0.55);
+    transition: 0.5s;
+}
+
+.profile-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 100px rgba(0, 51, 102, 0.7);
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(200px); 
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-200px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.section-title {
+    margin-left: 5%;
+    font-size: 24px;
+    margin-bottom: 15px;
+
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.section-title::before {
+    content: "";
+    width: 5px;
+    height: 35px;
+    background: #1B263B;
+    border-radius: 10px;
+    flex-shrink: 0;
+}
+
+.section-text {
+    font-weight: 700;
+    letter-spacing: 1px;
+
+    background: linear-gradient(135deg, #1B263B, #3a5f85, #1B263B);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.highlight {
+    color: #003366;
+    font-weight: 700;
+    border-bottom: 3px solid rgba(0, 51, 102, 0.2);
+}
+
+.gallery-header {
+    animation: fadeUp 1.0s ease-out both;
+}
+
+.gallery-header font,
+.gallery-header b {
+    animation: fadeUp 1.0s ease-out both;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.info-card {
+    width: 580px;
+    position: relative;
+}
+
+.card-page {
+    display: none;
+}
+
+.card-page.active {
+    display: block;
+    animation: fadeUp 1.0s ease-out;
+}
+
+.card-page:not(:first-child) .glass-table {
+    animation: fadeUp 1.0s ease-out;
+}
+
+.glass-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 51, 102, 0.08);
+    animation: slideInLeft 1.0s ease-out;
+}
+
+.glass-table td {
+    padding: 35px 40px;
+}
+
+.card-main-name {
+    font-size: 58px;
+    margin: 0;
+    color: #003366;
+    font-weight: 800;
+}
+
+.card-sub-name {
+    font-size: 34px;
+    margin: 10px 0;
+    font-weight: 500;
+    letter-spacing: 2px;
+}
+
+.card-tagline {
+    font-size: 18px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: #4a6fa5;
+    margin-top: 20px;
+}
+
+.card-about-title {
+    font-size: 38px;
+    margin-bottom: 18px;
+    color: #003366;
+}
+
+.card-about-text {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #1B263B;
+}
+
+.card-about-link {
+    margin-top: 20px;
+    display: inline-block;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.card-about-link:hover {
+    transform: translateX(5px);
+}
+
+.card-arrow {
+    transition: 0.3s;
+}
+
+/* VIDEO GRID SYSTEM */
+.video-grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 kolom sejajar */
+    gap: 30px;
+    padding: 40px 10%;
+}
+
+.video-card {
+    background: white;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    cursor: pointer;
+    transition: 0.3s ease;
+    text-align: center;
+}
+
+.video-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 51, 102, 0.15);
+}
+
+.video-thumbnail {
+    width: 100%;
+    height: 180px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #000;
+}
+
+.video-thumbnail video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-card h3 {
+    font-size: 16px;
+    margin-top: 15px;
+    color: #1B263B;
+}
+
+/* DETAIL SECTION */
+.video-detail-section {
+    padding: 50px 0;
+    background: rgba(255, 255, 255, 0.3);
+    animation: fadeUp 1s ease;
+}
+
+.detail-content {
+    animation: fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Style untuk Tombol Indikator di dalam Kartu */
+.view-button {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #003366;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: 0.3s;
+    opacity: 0.8;
+}
+
+.view-button span {
+    transition: transform 0.3s ease;
+}
+
+/* Efek saat kartu di-hover */
+.video-card:hover .view-button {
+    color: #2c5c8a;
+    opacity: 1;
+}
+
+.video-card:hover .view-button span {
+    transform: translateX(5px); /* Panah bergeser ke kanan sedikit */
+}
+
+/* KONTAK TANPA SCROLL (Fixed to Viewport) */
+/* Tambahan agar container utama pas di layar */
+.contact-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    padding: 10px 5% 10px; /* Kecilkan padding bawah */
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.contact-card {
+    background: white;
+    padding: 20px 15px; /* Padding dalam kartu dikurangi agar lebih pendek */
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 51, 102, 0.05);
+    transition: all 0.4s ease;
+    border: 1px solid rgba(0, 51, 102, 0.05);
+    animation: fadeUp 0.8s ease-out both;
+}
+
+.contact-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 51, 102, 0.15);
+    border-color: #003366;
+}
+
+/* Ukuran elemen dalam kartu dikecilkan secara proporsional */
+.contact-icon {
+    font-size: 35px; /* Ikon diperkecil */
+    margin-bottom: 8px;
+    display: block;
+}
+
+.contact-card h3 {
+    color: #003366;
+    margin: 5px 0;
+    font-size: 18px; /* Judul kartu diperkecil */
+}
+
+.contact-card p {
+    color: #4a6fa5;
+    font-size: 12px; /* Teks deskripsi/email diperkecil */
+    margin-bottom: 15px;
+}
+
+.contact-btn {
+    display: inline-block;
+    padding: 8px 18px; /* Tombol dibuat lebih ramping */
+    background-color: #003366;
+    color: white !important;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 12px;
+    transition: 0.3s;
+}
+
+.contact-btn:hover {
+    background-color: #1B263B;
+    box-shadow: 0 5px 15px rgba(0, 51, 102, 0.3);
+}
+
+/* Penyesuaian Header agar tidak memakan ruang tinggi */
+.gallery-header {
+    padding: 20px 20px 5px !important;
+}
+
+.divider {
+    margin: 0 auto 15px !important;
+}
+
+/* Delay Animasi tetap dipertahankan */
+.contact-card:nth-child(1) { animation-delay: 0.1s; }
+.contact-card:nth-child(2) { animation-delay: 0.2s; }
+.contact-card:nth-child(3) { animation-delay: 0.3s; }
+.contact-card:nth-child(4) { animation-delay: 0.4s; }

@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog - Gracia</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body bgcolor="#E6F2FF" text="#1B263B" link="#003366">
+    <nav class="navbar">
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="blog.html" class="active">Blog</a>
+        <a href="contact.html">Contact</a>
+      </div>
+
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+
+    <header class="gallery-header">
+      <center>
+        <font size="6">
+          <b class="gradient-subtitle handwriting">Documenting My Journey</b>
+        </font>
+      </center>
+      <center>
+        <font size="6">
+          <b class="gradient-text gallery-title">Kegiatan dan Minat Pribadi</b>
+        </font>
+      </center>
+      <br />
+      <center>
+        <font size="4">
+          Dokumentasi beberapa kegiatan dan hal yang saya sukai.
+        </font>
+      </center>
+    </header>
+
+    <div class="divider"></div>
+
+    <div class="video-grid-container">
+      <div class="video-card" onclick="showVideo('music')">
+        <div class="video-thumbnail">
+          <video
+            muted
+            loop
+            onmouseover="this.play()"
+            onmouseout="
+              this.pause();
+              this.currentTime = 0;
+            "
+          >
+            <source src="video1.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <h3>My Interest in Music</h3>
+        <div class="view-button">View Detail <span>&rarr;</span></div>
+      </div>
+
+      <div class="video-card" onclick="showVideo('leonardo')">
+        <div class="video-thumbnail">
+          <video
+            muted
+            loop
+            onmouseover="this.play()"
+            onmouseout="
+              this.pause();
+              this.currentTime = 0;
+            "
+          >
+            <source src="video2.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <h3>Inspiration from Leonardo Edwin</h3>
+        <div class="view-button">View Detail <span>&rarr;</span></div>
+      </div>
+
+      <div class="video-card" onclick="showVideo('friends')">
+        <div class="video-thumbnail">
+          <video
+            muted
+            loop
+            onmouseover="this.play()"
+            onmouseout="
+              this.pause();
+              this.currentTime = 0;
+            "
+          >
+            <source src="video3.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <h3>Moment with Friends</h3>
+        <div class="view-button">View Detail <span>&rarr;</span></div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div
+      id="videoDetailArea"
+      class="video-detail-section"
+      style="display: none"
+    >
+      <center>
+        <div id="content-music" class="detail-content" style="display: none">
+          <font size="5"><b>My Interest in Music</b></font
+          ><br /><br />
+          <video width="700" controls id="player-music">
+            <source src="video1.mp4" type="video/mp4" />
+          </video>
+          <table width="65%">
+            <tr>
+              <td align="justify">
+                <font size="4"
+                  >Dalam dunia musik modern, K-Pop menjadi salah satu genre yang
+                  sangat populer secara global. Industri ini didukung oleh
+                  berbagai agensi besar, salah satunya adalah SM Entertainment
+                  yang terkenal dengan konsep musik, visual, dan kualitas
+                  produksi yang khas. Dari berbagai karya musik modern yang ada,
+                  saya pribadi paling tertarik dengan karya-karya dari SM
+                  Entertainment karena menurut saya memiliki ciri khas yang kuat
+                  dan enak untuk diikuti.</font
+                >
+              </td>
+            </tr>
+          </table>
+          <br /><a href="https://www.youtube.com/@SMTOWN" target="_blank"
+            >Kunjungi Channel SM Entertainment</a
+          >
+        </div>
+
+        <div id="content-leonardo" class="detail-content" style="display: none">
+          <font size="5"><b>Inspiration from Leonardo Edwin</b></font
+          ><br /><br />
+          <video width="700" controls id="player-leonardo">
+            <source src="video2.mp4" type="video/mp4" />
+          </video>
+          <table width="65%">
+            <tr>
+              <td align="justify">
+                <font size="4"
+                  >Di era digital saat ini, banyak content creator yang
+                  membagikan pengalaman hidup mereka melalui video, terutama
+                  dalam bentuk travelling dan eksplorasi. Salah satunya adalah
+                  Leonardo Edwin, seorang YouTuber asal Indonesia yang dikenal
+                  dengan konten perjalanan dan kehidupannya di luar negeri.
+                  Kontennya tidak hanya sekadar travelling biasa, tetapi juga
+                  memperlihatkan proses belajar dari lingkungan dan pengalaman
+                  baru di berbagai tempat. Saya sudah mengikuti kontennya sejak
+                  tahun 2019 karena merasa memiliki kesamaan minat, khususnya
+                  dalam hal petualangan dan dokumentasi visual.</font
+                >
+              </td>
+            </tr>
+          </table>
+          <br /><a href="https://www.youtube.com/@LeonardoEdwin" target="_blank"
+            >Kunjungi Channel Leonardo Edwin</a
+          >
+        </div>
+
+        <div id="content-friends" class="detail-content" style="display: none">
+          <font size="5"><b>Moment with Friends</b></font
+          ><br /><br />
+          <video width="700" controls id="player-friends">
+            <source src="video3.mp4" type="video/mp4" />
+          </video>
+          <table width="65%">
+            <tr>
+              <td align="justify">
+                <font size="4"
+                  >Takjil merupakan makanan atau minuman ringan yang biasanya
+                  dikonsumsi saat berbuka puasa. Kegiatan berburu takjil sering
+                  menjadi momen yang menyenangkan karena dilakukan bersama
+                  teman-teman. Video ini merupakan dokumentasi saya bersama
+                  teman-teman saat berburu takjil. Selain menjadi momen
+                  kebersamaan, kegiatan ini juga saya abadikan karena saya
+                  memiliki ketertarikan dalam mendokumentasikan berbagai momen
+                  sederhana dalam bentuk visual.</font
+                >
+              </td>
+            </tr>
+          </table>
+        </div>
+      </center>
+    </div>
+
+    <hr width="100%" />
+    <center><font size="3">© 2026 Gracia Eka Putri Samino</font></center>
+
+    <script src="script.js"></script>
+  </body>
+</html>
