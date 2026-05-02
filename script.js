@@ -82,18 +82,9 @@ if (lightbox && lightboxImg && closeBtn && prevBtn && nextBtn) {
 const hamburger = document.getElementById("hamburger");
 const navLinks = document.getElementById("navLinks");
 
-if (localStorage.getItem("menuOpen") === "true") {
-    hamburger.classList.add("active");
-    navLinks.classList.add("show");
-}
-
 hamburger.addEventListener("click", () => {
     hamburger.classList.toggle("active");
     navLinks.classList.toggle("show");
-
-    localStorage.setItem("menuOpen",
-        navLinks.classList.contains("show")
-    );
 });
 
 const homePage = document.getElementById("homePage");
@@ -113,28 +104,23 @@ if (aboutTrigger && backTrigger && homePage && aboutPage) {
     });
 }
 
-// LOGIKA INTERAKTIF BLOG VIDEO
 function showVideo(videoId) {
     const detailArea = document.getElementById('videoDetailArea');
     const allContents = document.querySelectorAll('.detail-content');
     const allPlayers = document.querySelectorAll('.detail-content video');
 
-    // Sembunyikan semua konten detail & hentikan video yang sedang putar
     allContents.forEach(content => content.style.display = 'none');
     allPlayers.forEach(player => {
         player.pause();
         player.currentTime = 0;
     });
 
-    // Tampilkan area detail dan konten yang dipilih
     detailArea.style.display = 'block';
     const targetContent = document.getElementById('content-' + videoId);
     targetContent.style.display = 'block';
 
-    // Scroll otomatis ke bagian detail dengan halus
     detailArea.scrollIntoView({ behavior: 'smooth' });
 
-    // Putar video secara otomatis (opsional)
     const activePlayer = document.getElementById('player-' + videoId);
     activePlayer.play();
 }

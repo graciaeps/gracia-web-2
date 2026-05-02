@@ -1,9 +1,12 @@
 body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
     background-color: #E6F2FF;
     color: #1B263B;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    overflow-x: hidden; 
+    overflow-x: hidden;
     width: 100%;
 }
 
@@ -102,23 +105,20 @@ body {
     z-index: 2;
 }
 
-/* 1. Warna untuk menu navigasi LAIN saat kursor diarahkan (Hover menu tidak aktif) */
 .nav-links a:hover {
-    background-color: #2c5c8a; /* Warna biru yang sedikit lebih terang */
-    color: #ffffff;            /* Teks tetap putih agar kontras */
+    background-color: #2c5c8a;
+    color: #ffffff;
     transform: scale(1.1);
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
-/* 2. Warna untuk menu yang SEDANG DIBUKA saat kursor diarahkan (Hover menu aktif) */
 .nav-links a.active:hover {
-    background-color: #1B263B; /* Warna biru sangat gelap (hampir hitam) agar beda */
-    color: #ffffff;            /* Teks tetap putih */
+    background-color: #1B263B; 
+    color: #ffffff; 
     transform: scale(1.1);
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
-.gallery-header { text-align: center; padding: 50px 20px; }
 .gallery-section { margin-bottom: 40px; }
 
 .scroll-container { width: 100%; overflow-x: auto; padding: 20px 0; cursor: grab; }
@@ -180,42 +180,6 @@ body {
 .prev { left: 40px; }
 .next { right: 40px; }
 
-/* Pastikan body menggunakan flex agar footer bisa mepet ke bawah */
-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Tinggi minimal seukuran layar */
-    margin: 0;
-}
-
-/* TAMBAHKAN INI DI PALING BAWAH */
-.contact-card h3 {
-    margin: 10px 0 5px 0;
-    font-size: 20px;
-}
-
-.contact-card p {
-    margin-bottom: 20px;
-    font-size: 13px;
-    color: #4a6fa5;
-}
-
-/* Biarkan kontainer utama mengambil ruang yang tersedia */
-.hero-container {
-    flex: 1; /* Ini yang akan mendorong footer ke bawah */
-    min-height: auto !important; 
-    padding-bottom: 20px;
-}
-
-.contact-container {
-    display: flex;          /* Mengubah grid jadi flex */
-    justify-content: center; /* Kotak-kotak kumpul di tengah secara horizontal */
-    align-items: center;    /* Kotak-kotak kumpul di tengah secara vertikal (SOLUSI BIAR GAK PANJANG) */
-    gap: 20px;
-    padding: 20px 5%;
-    flex: 1;                /* Tetap mendorong footer ke paling bawah layar */
-}
-
 hr {
     border: 0;
     border-top: 1px solid rgba(0, 51, 102, 0.2);
@@ -240,20 +204,6 @@ center font {
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-}
-
-.divider {
-    width: 90%;
-    margin: 0 auto 40px;
-    height: 2px;
-    background: linear-gradient(
-        to right,
-        transparent,
-        #003366,
-        #003366,
-        transparent
-    );
-    position: relative;
 }
 
 .divider::after {
@@ -382,6 +332,8 @@ center font {
 }
 
 .gallery-header {
+    text-align: center;
+    padding: 20px 20px 5px;
     animation: fadeUp 1.0s ease-out both;
 }
 
@@ -412,10 +364,6 @@ center font {
 
 .card-page.active {
     display: block;
-    animation: fadeUp 1.0s ease-out;
-}
-
-.card-page:not(:first-child) .glass-table {
     animation: fadeUp 1.0s ease-out;
 }
 
@@ -485,10 +433,9 @@ center font {
     transition: 0.3s;
 }
 
-/* VIDEO GRID SYSTEM */
 .video-grid-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 kolom sejajar */
+    grid-template-columns: repeat(3, 1fr); 
     gap: 30px;
     padding: 40px 10%;
 }
@@ -528,7 +475,6 @@ center font {
     color: #1B263B;
 }
 
-/* DETAIL SECTION */
 .video-detail-section {
     padding: 50px 0;
     background: rgba(255, 255, 255, 0.3);
@@ -544,7 +490,6 @@ center font {
     to { opacity: 1; }
 }
 
-/* Style untuk Tombol Indikator di dalam Kartu */
 .view-button {
     margin-top: 10px;
     font-size: 14px;
@@ -562,30 +507,27 @@ center font {
     transition: transform 0.3s ease;
 }
 
-/* Efek saat kartu di-hover */
 .video-card:hover .view-button {
     color: #2c5c8a;
     opacity: 1;
 }
 
 .video-card:hover .view-button span {
-    transform: translateX(5px); /* Panah bergeser ke kanan sedikit */
+    transform: translateX(5px); 
 }
 
-/* KONTAK TANPA SCROLL (Fixed to Viewport) */
-/* Tambahan agar container utama pas di layar */
 .contact-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 15px;
-    padding: 10px 5% 10px; /* Kecilkan padding bawah */
+    padding: 10px 5% 10px;
     max-width: 1200px;
     margin: 0 auto;
 }
 
 .contact-card {
     background: white;
-    padding: 20px 15px; /* Padding dalam kartu dikurangi agar lebih pendek */
+    padding: 20px 15px;
     border-radius: 15px;
     text-align: center;
     box-shadow: 0 8px 20px rgba(0, 51, 102, 0.05);
@@ -600,9 +542,8 @@ center font {
     border-color: #003366;
 }
 
-/* Ukuran elemen dalam kartu dikecilkan secara proporsional */
 .contact-icon {
-    font-size: 35px; /* Ikon diperkecil */
+    font-size: 35px; 
     margin-bottom: 8px;
     display: block;
 }
@@ -610,18 +551,18 @@ center font {
 .contact-card h3 {
     color: #003366;
     margin: 5px 0;
-    font-size: 18px; /* Judul kartu diperkecil */
+    font-size: 18px; 
 }
 
 .contact-card p {
     color: #4a6fa5;
-    font-size: 12px; /* Teks deskripsi/email diperkecil */
+    font-size: 12px;
     margin-bottom: 15px;
 }
 
 .contact-btn {
     display: inline-block;
-    padding: 8px 18px; /* Tombol dibuat lebih ramping */
+    padding: 8px 18px; 
     background-color: #003366;
     color: white !important;
     text-decoration: none;
@@ -636,17 +577,146 @@ center font {
     box-shadow: 0 5px 15px rgba(0, 51, 102, 0.3);
 }
 
-/* Penyesuaian Header agar tidak memakan ruang tinggi */
-.gallery-header {
-    padding: 20px 20px 5px !important;
-}
-
 .divider {
+    width: 90%;
     margin: 0 auto 15px !important;
+    height: 2px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        #003366,
+        #003366,
+        transparent
+    );
+    position: relative;
 }
 
-/* Delay Animasi tetap dipertahankan */
 .contact-card:nth-child(1) { animation-delay: 0.1s; }
 .contact-card:nth-child(2) { animation-delay: 0.2s; }
 .contact-card:nth-child(3) { animation-delay: 0.3s; }
 .contact-card:nth-child(4) { animation-delay: 0.4s; }
+
+@media screen and (max-width: 768px) {
+
+    .navbar {
+        padding: 15px 4%;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .hamburger {
+        display: none;
+    }
+
+    .nav-links {
+        opacity: 1;
+        transform: none;
+        pointer-events: auto;
+        display: flex;
+        gap: 8px;
+        margin-left: 0;
+    }
+
+    .nav-links a {
+        opacity: 1;
+        transform: none;
+        font-size: 12px;
+        padding: 8px 12px;
+    }
+
+    .hero-container {
+        flex-direction: column;
+        padding: 20px 5%;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .info-card {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .glass-table td {
+        padding: 25px 20px;
+    }
+
+    .card-main-name {
+        font-size: 42px;
+    }
+
+    .card-sub-name {
+        font-size: 28px;
+    }
+
+    .card-tagline {
+        font-size: 14px;
+        letter-spacing: 3px;
+    }
+
+    .profile-img {
+        width: 220px;
+        height: 220px;
+    }
+
+    .gallery-title {
+        font-size: 48px;
+        letter-spacing: 2px;
+    }
+
+    .section-title {
+        font-size: 18px;
+        margin-left: 6%;
+    }
+
+    .card-nct {
+        width: 180px;
+        height: 260px;
+    }
+
+    .card-nct.card-landscape {
+        width: 280px;
+    }
+
+    .video-grid-container {
+        grid-template-columns: 1fr;
+        padding: 20px 6%;
+        gap: 20px;
+    }
+
+    .video-thumbnail {
+        height: 200px;
+    }
+
+    .detail-content video {
+        width: 90%;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .detail-content table {
+        width: 90%;
+    }
+
+    .contact-container {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 20px 5%;
+        gap: 15px;
+    }
+
+    .contact-card {
+        padding: 18px 12px;
+    }
+
+    .contact-card h3 {
+        font-size: 16px;
+    }
+
+    .contact-card p {
+        font-size: 11px;
+    }
+
+    .contact-btn {
+        font-size: 11px;
+        padding: 8px 14px;
+    }
+}
