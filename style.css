@@ -188,7 +188,7 @@ hr {
 
 center font {
     display: block;
-    padding: 10px 0;
+    padding: 5px 0;
     line-height: 1;
 }
 
@@ -333,7 +333,7 @@ center font {
 
 .gallery-header {
     text-align: center;
-    padding: 20px 20px 5px;
+    padding: 10px 20px 0;
     animation: fadeUp 1.0s ease-out both;
 }
 
@@ -370,14 +370,25 @@ center font {
 .glass-table {
     width: 100%;
     border-collapse: collapse;
-    background: rgba(255, 255, 255, 0.18);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.35);
-    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 24px;
     overflow: hidden;
-    box-shadow: 0 8px 25px rgba(0, 51, 102, 0.08);
-    animation: slideInLeft 1.0s ease-out;
+    box-shadow: 0 15px 35px rgba(0, 51, 102, 0.12);
+    animation: slideInLeft 1s ease-out;
+    position: relative;
+}
+
+.glass-table::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(to right, #003366, #4a6fa5);
 }
 
 .glass-table td {
@@ -419,14 +430,45 @@ center font {
 }
 
 .card-about-link {
-    margin-top: 20px;
+    margin-top: 25px;
     display: inline-block;
     cursor: pointer;
     font-weight: 600;
+    background: #003366;
+    color: white;
+    padding: 12px 22px;
+    border-radius: 30px;
+    transition: 0.3s ease;
+    box-shadow: 0 8px 18px rgba(0, 51, 102, 0.18);
 }
 
 .card-about-link:hover {
-    transform: translateX(5px);
+    transform: translateY(-3px);
+    background: #1B263B;
+}
+
+.bg-circle {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    z-index: -1;
+    opacity: 0.35;
+}
+
+.bg-circle-1 {
+    width: 220px;
+    height: 220px;
+    background: #8bb8ff;
+    top: 140px;
+    left: 180px;
+}
+
+.bg-circle-2 {
+    width: 260px;
+    height: 260px;
+    background: #c5dcff;
+    right: 180px;
+    bottom: 120px;
 }
 
 .card-arrow {
@@ -514,15 +556,6 @@ center font {
 
 .video-card:hover .view-button span {
     transform: translateX(5px); 
-}
-
-.contact-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-    padding: 10px 5% 10px;
-    max-width: 1200px;
-    margin: 0 auto;
 }
 
 .contact-card {
@@ -704,7 +737,9 @@ center font {
     }
 
     .contact-card {
-        padding: 18px 12px;
+    background: white;
+    width: 260px;
+    padding: 15px 12px;
     }
 
     .contact-card h3 {
@@ -718,5 +753,121 @@ center font {
     .contact-btn {
         font-size: 11px;
         padding: 8px 14px;
+    }
+}
+
+.contact-layout {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 28px;
+    padding: 10px 5% 15px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.student-profile {
+    flex: 1;
+    max-width: 420px;
+    text-align: left;
+    padding: 0;
+    margin-left: 100px;
+    animation: fadeUp 0.8s ease-out;
+}
+
+.student-profile h2 {
+    color: #003366;
+    font-size: 26px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-align: center; /* Diganti dari left ke center agar pas di tengah kotak */
+}
+
+.student-card {
+    background: white;
+    padding: 18px 24px;
+    border-radius: 18px;
+    box-shadow: 0 8px 20px rgba(0, 51, 102, 0.06);
+    border: 1px solid rgba(0, 51, 102, 0.08);
+    text-align: left;
+}
+
+.student-card p {
+    margin: 12px 0;
+    font-size: 16px;
+    color: #1B263B;
+    line-height: 1.6;
+}
+
+.student-card strong {
+    color: #003366;
+}
+
+.contact-container {
+    flex: 2;
+    display: grid;
+    grid-template-columns: repeat(2, 260px);
+    gap: 18px;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+}
+
+@media screen and (max-width: 768px) {
+    .contact-layout {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 10px 5% 20px;
+    }
+
+    .student-profile {
+        max-width: 100%;
+        width: 100%;
+        margin-left: 0;
+        padding: 0;
+    }
+
+    .student-profile h2 {
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+
+    .student-card {
+        padding: 18px;
+        border-radius: 15px;
+    }
+
+    .student-card p {
+        font-size: 14px;
+        margin: 10px 0;
+    }
+
+    .contact-container {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 15px;
+        justify-items: center;
+    }
+
+    .contact-card {
+        width: 100%;
+        max-width: 320px;
+        padding: 18px 15px;
+    }
+
+    .contact-card h3 {
+        font-size: 16px;
+    }
+
+    .contact-card p {
+        font-size: 12px;
+    }
+
+    .contact-btn {
+        font-size: 12px;
+        padding: 8px 16px;
     }
 }
